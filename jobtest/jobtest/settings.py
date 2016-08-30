@@ -56,7 +56,7 @@ ROOT_URLCONF = 'jobtest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['',r'\tds\jobtest\todolist\template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
