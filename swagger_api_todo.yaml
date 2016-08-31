@@ -1,0 +1,97 @@
+# this is an example of the TODO List API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: Test job
+  description: TODO list с REST API
+  version: "1.0.0"
+# the domain of the service
+host: poiskpoisk.pythonanywhere.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /
+produces:
+  - application/json
+paths:
+  /users/:
+    get:
+      summary: User info
+      description: |
+        The Users endpoint returns information about users of TODO list.
+      tags:
+        - Users
+      responses:
+        200:
+          description: An array of users specs
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Users'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /tasks/:
+    get:
+      summary: Task list
+      description: |
+        The Tasks endpoint returns information about tasks of TODO list.
+      tags:
+        - Tasks
+      responses:
+        200:
+          description: An array of users specs
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Tasks'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'          
+definitions:
+  Users:
+    type: object
+    properties:
+      username:
+        type: string
+        description: Unique username
+      email:
+        type: string
+        description: User E-Mail.
+      is_staff:
+        type: boolean
+        description: Are user is staff ? ( YES or NO ).
+  Tasks:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: Unique task ID
+      comment:
+        type: string
+        description: Comment for task.
+      create_date:
+        type: string
+        description: Datatime in string format
+      priority:
+        type: integer
+        description: Level of task priority
+      completed:
+        type: boolean
+        description: Is task completed ? ( YES or NO ).
+      todo_list:    
+        type: integer
+        description: Task ID
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
